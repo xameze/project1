@@ -1,3 +1,335 @@
-dialog { padding: 1.25rem; border: none; border-radius: 12px; }
-dialog::backdrop { background: rgba(0,0,0,.5); }
-.form-actions { display:flex; gap:.5rem; margin-top:1rem; }
+:root {
+  /* Палитра */
+  --color-bg: #fff;
+  --color-fg: #0b0b0b;
+  --color-muted: #666;
+  --color-primary: #0a84ff;
+  --color-danger: #b00020;
+
+  /* Типографика и размеры */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 1rem;      /* 16px */
+  --space-4: 1.5rem;    /* 24px */
+  --space-5: 2.5rem;    /* 40px */
+
+  /* Скругления и тени */
+  --radius: 0.75rem;    /* 12px */
+  --shadow: 0 1px 2px rgba(0, 0, 0, .08), 0 8px 24px rgba(0, 0, 0, .08);
+}
+
+/* Тёмная тема */
+body.theme-dark {
+  --color-bg: #0b0b0b;
+  --color-fg: #f5f5f5;
+  --color-muted: #aaa;
+  --color-primary: #6aa2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Общий контейнер для центрирования контента */
+.container {
+  width: min(100% - 2 * var(--space-4), 1120px);
+  margin-inline: auto;
+}
+
+/* Отступы для секций */
+.section {
+  padding-block: var(--space-5);
+}
+
+/* Стили для заголовков и текста */
+h1, h2, h3, h4 {
+  margin: 0 0 var(--space-3);
+  line-height: 1.2;
+}
+
+/* Плавная прокрутка по якорям */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Стили для якорных целей */
+:target {
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 4px;
+}
+
+/* Важные стили фокуса для доступности */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Состояние недоступного элемента */
+:disabled, [aria-disabled="true"] {
+  opacity: .6;
+  cursor: not-allowed;
+}
+/* HEADER */
+.header {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-muted);
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.header__brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Навигация */
+.nav__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-3);
+}
+
+.nav__link {
+  color: var(--color-muted);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav__link:link { 
+  color: var(--color-muted);
+}
+.nav__link:visited {
+  color: var(--color-muted);
+}
+.nav__link:hover {
+  color: var(--color-primary);
+  background-color: rgba(10, 132, 255, 0.05);
+}
+.nav__link:active {
+  color: var(--color-primary);
+  background-color: rgba(10, 132, 255, 0.1);
+}
+.nav__link:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Модификатор для кнопки призыва к действию */
+.nav__link--cta {
+  background-color: var(--color-primary);
+  color: white !important; 
+}
+.nav__link--cta:hover {
+  background-color: #0071e3;
+}
+/* Хлебные крошки */
+.breadcrumbs {
+  padding: var(--space-3) 0;
+}
+
+.breadcrumbs__link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.breadcrumbs__link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumbs__separator {
+  color: var(--color-muted);
+  margin: 0 var(--space-1);
+}
+
+.breadcrumbs__current {
+  color: var(--color-muted);
+}
+/* BUTTON */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background-color: var(--color-muted);
+  color: var(--color-bg);
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.button:hover {
+  background-color: color-mix(in srgb, var(--color-muted) 15%, black);
+}
+.button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Модификаторы кнопки */
+.button--primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+.button--primary:hover {
+  background-color: color-mix(in srgb, var(--color-primary) 15%, black);
+}
+
+.button--secondary {
+  background-color: transparent;
+  border-color: currentColor;
+  color: var(--color-fg);
+}
+.button--secondary:hover {
+  background-color: color-mix(in srgb, var(--color-muted) 90%, transparent);
+}
+
+/* Модальное окно */
+.modal {
+  padding: 0;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: min(90vw, 600px);
+}
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.modal__content {
+  padding: var(--space-4);
+}
+
+.modal__title {
+  margin-top: 0;
+}
+
+/* FORM */
+.form__field {
+  margin-bottom: var(--space-3);
+}
+
+.form__label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-weight: 500;
+}
+
+.form__help {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.form__input,
+.form__select,
+.form__textarea {
+  width: 100%;
+  padding: var(--space-2);
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius);
+  background-color: var(--color-bg);
+  transition: border-color 0.2s ease;
+}
+/* Состояния полей ввода */
+.form__input:hover,
+.form__select:hover,
+.form__textarea:hover {
+  border-color: color-mix(in srgb, var(--color-muted) 50%, black);
+}
+.form__input:focus-visible,
+.form__select:focus-visible,
+.form__textarea:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+}
+.form__input[aria-invalid="true"],
+.form__select[aria-invalid="true"],
+.form__textarea[aria-invalid="true"] {
+  border-color: var(--color-danger);
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 4rem;
+}
+
+.form__actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  justify-content: flex-end;
+}
+/* HERO */
+.hero {
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)),
+    url("../assets/img/dota2.jpg") center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: var(--space-5) 1rem;
+  border-radius: 0 0 var(--radius) var(--radius);
+  margin-bottom: var(--space-5);
+}
+
+.hero__title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: var(--space-3);
+}
+
+.hero__subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  margin-bottom: var(--space-4);
+}
+/* MEDIA */
+.media {
+  aspect-ratio: 16 / 9;
+  width: min(100%, 960px);
+  margin-inline: auto;
+}
+
+.media__element,
+.media iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: var(--radius);
+}

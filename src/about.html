@@ -1,36 +1,69 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
-    ... <!-- Скопируйте весь блок <head> из index.html -->
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    ...
     <title>О нас - Название вашего сайта</title>
-    <meta name="description" content="Узнайте больше о нашей компании и истории">
-    
-</head>
+    <meta
+      name="description"
+      content="Узнайте больше о нашей компании и истории"
+    />
+  </head>
 
-<body>
-    <header>
-        ... <!-- Скопируйте весь блок <header> из index.html -->
+  <body>
+    <header class="header">
+      <div class="container header__container">
+        <a class="header__brand" href="/">Логотип или название сайта</a>
+
+        <nav class="nav" aria-label="Основная навигация">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a class="nav__link" href="index.html">Главная</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="about.html">О нас</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link" href="contacts.html">Контакты</a>
+            </li>
+            <li class="nav__item">
+              <a class="nav__link nav__link--cta" href="contacts.html"
+                >Связаться</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
     <main>
-        <!-- Простые "хлебные крошки" -->
-        <nav aria-label="Хлебные крошки">
-            <a href="index.html">Главная</a> →
-            <span>О нас</span>
-        </nav>
-        <h1>О нашей компании</h1>
-        <section>
-            <h2>Наша история</h2>
-            <p>Текст о том, как все начиналось...</p>
-        </section>
-        <section>
-            <h2>Наша команда</h2>
-            <p>Текст о команде...</p>
-        </section>
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a class="breadcrumbs__link" href="index.html">Главная</a>
+        <span class="breadcrumbs__separator" aria-hidden="true">→</span>
+        <span class="breadcrumbs__current">О нас</span>
+      </nav>
+      <h1>О нашей компании</h1>
+      <section>
+        <h2>Наша история</h2>
+        <p>Текст о том, как все начиналось...</p>
+      </section>
+      <section>
+        <h2>Наша команда</h2>
+        <picture>
+          <source type="image/avif" srcset="../assets/img/LGD.avif" />
+          <source type="image/webp" srcset="../assets/img/LGD.webp" />
+          <img
+            src="../assets/img/LGD.jpg"
+            alt="Фотография нашей дружной команды"
+            width="640"
+            height="360"
+            loading="lazy"
+          />
+        </picture>
+        <p>Текст о команде...</p>
+      </section>
     </main>
     <footer>
-        ... <!-- Скопируйте весь блок <footer> из index.html -->
+      ...
     </footer>
-</body>
-
+  </body>
 </html>
